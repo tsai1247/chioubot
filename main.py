@@ -50,7 +50,7 @@ def InputLoop():
                         receivefield.insert('end', '\n\n')
                     else:
                         receivefield.insert('end', data + '\n')
-
+                receivefield.yview_moveto(1)
                 receivefield.config(state='disabled')
                 curlen = len(receivedList)
             sleep(1)
