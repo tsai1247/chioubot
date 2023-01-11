@@ -13,7 +13,6 @@ config.json
 .vscode
 *.db
 .env
-*.txt
 *.backup
 photo/*
 sticker/*
