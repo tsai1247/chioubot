@@ -56,7 +56,7 @@ async def getPhoto(update: Update, bot):
     await file.download(filename)
 
     receivedList.append((message, filename))
-    saveMessage(message)
+    saveMessage(message + '\n' + filename + '\n')
     print(f'get {message}')
 
 
@@ -83,7 +83,7 @@ async def getStaticSticker(update: Update, bot):
     await file.download(filename)
 
     receivedList.append((message, filename))
-    saveMessage(message)
+    saveMessage(message + '\n' + filename + '\n')
     print(f'get {message}')
 
 async def getAnimatedSticker(update: Update, bot):
@@ -109,5 +109,5 @@ async def getAnimatedSticker(update: Update, bot):
     await file.download(filename)
 
     receivedList.append((message, filename))
-    saveMessage(message)
+    saveMessage(message + '\n' + filename + '\n')
     print(f'get {message}')

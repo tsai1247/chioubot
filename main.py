@@ -47,7 +47,7 @@ def InputLoop():
                         fullfilename = os.path.abspath(data[1])
                         receivefield.insert('end', data[1], hyperlink.add(partial(webbrowser.open, f'file:///{fullfilename}')))
 
-                        receivefield.insert('end', '\n')    
+                        receivefield.insert('end', '\n\n')
                     else:
                         receivefield.insert('end', data + '\n')
 
@@ -70,11 +70,13 @@ def InputLoop():
     def send():
         if chat_id != 0:
             messagetime = datetime.now().strftime("%m/%d %H:%M")
+            
+            originmsg = inputfield.get("1.0", "end").replace('\n', '\n    ')
             message = inputfield.get("1.0", "end")
             message =   f'You:    {messagetime}\n' + \
-                        f'    {message}'
+                        f'    {originmsg}'
 
-            sendingmsg = inputfield.get("1.0", "end")
+            sendingmsg = originmsg
             inputfield.delete("1.0", "end")
             receivedList.append(message)
             saveMessage(message)
