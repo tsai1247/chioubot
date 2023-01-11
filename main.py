@@ -71,12 +71,12 @@ def InputLoop():
         if chat_id != 0:
             messagetime = datetime.now().strftime("%m/%d %H:%M")
             
-            originmsg = inputfield.get("1.0", "end").replace('\n', '\n    ')
+            originmsg = inputfield.get("1.0", "end")
             message = inputfield.get("1.0", "end")
             message =   f'You:    {messagetime}\n' + \
                         f'    {originmsg}'
 
-            sendingmsg = originmsg
+            sendingmsg = originmsg.replace('\n', '\n    ')
             inputfield.delete("1.0", "end")
             receivedList.append(message)
             saveMessage(message)
