@@ -64,21 +64,22 @@ def InputLoop():
     settopmost()
     tpmost_checkbox = tk.Checkbutton(window, text='topmost', variable=istopmost, command=settopmost)
     tpmost_checkbox.pack(anchor='ne')
-
+    
+    sending = asyncio.new_event_loop()
+    asyncio.set_event_loop(sending)
     def send():
         if chat_id != 0:
-            sending = asyncio.new_event_loop()
-            asyncio.set_event_loop(sending)
             messagetime = datetime.now().strftime("%m/%d %H:%M")
             message = inputfield.get("1.0", "end")
             message =   f'You:    {messagetime}\n' + \
                         f'    {message}'
+
+            sendingmsg = inputfield.get("1.0", "end")
+            inputfield.delete("1.0", "end")
+            sending.run_until_complete(Send(chat_id, sendingmsg))
             receivedList.append(message)
             saveMessage(message)
-
-            sending.run_until_complete(Send(chat_id, inputfield.get("1.0", "end")))
-            inputfield.delete("1.0", "end")
-            sending.close()
+            
 
     inputframe = tk.Frame(window)
     inputfield = tk.Text(inputframe, width=50, height=6, font=('Arial', 12))
@@ -108,7 +109,8 @@ def main():
     # commands
     app.add_handler(MessageHandler(filters.TEXT, getText))
     app.add_handler(MessageHandler(filters.PHOTO, getPhoto))
-    app.add_handler(MessageHandler(filters.ALL, getSticker))
+    app.add_handler(MessageHandler(filters.Sticker.STATIC, getStaticSticker))
+    app.add_handler(MessageHandler(filters.Sticker.ANIMATED, getAnimatedSticker))
 
     # run
     logging.info("KaTsuGenshinBot Server Running...")
