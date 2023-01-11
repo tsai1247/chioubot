@@ -84,21 +84,21 @@ def InputLoop():
             
 
     inputframe = tk.Frame(window)
-    inputfield = tk.Text(inputframe, width=50, height=6, font=('Arial', 12))
-    sendbutton = tk.Button(inputframe, text="送出", command=send, width=10, height=6, font=('Arial', 12))
+    inputfield = tk.Text(inputframe, height=6, font=('Arial', 12))
+    sendbutton = tk.Button(inputframe, text="送出", command=send, width=10, font=('Arial', 12))
     receivefield = tk.Text(window, background='lightblue',
-        width=60, height=20, font=('Arial', 12), foreground='black')
+        height=20, font=('Arial', 12), foreground='black')
     hyperlink = HyperlinkManager(receivefield)
     receivefield.config(state='disabled')
     scrollbar=tk.Scrollbar(window)
     receivefield.config(yscrollcommand=scrollbar.set) 
     scrollbar.config(command=receivefield.yview) 
 
-    inputframe.pack(side='bottom')
-    sendbutton.pack(side='right')
-    inputfield.pack(side='left')
+    inputframe.pack(side='bottom', fill=tk.BOTH, expand=1)
+    sendbutton.pack(side='right', fill=tk.Y)
+    inputfield.pack(side='left', fill=tk.BOTH, expand=1)
     scrollbar.pack(side='right', fill=tk.Y)
-    receivefield.pack(side='left', fill=tk.Y)
+    receivefield.pack(side='left', fill=tk.BOTH, expand=1)
 
     threading.Thread(target= UpdateMessage).start()
 
