@@ -76,9 +76,9 @@ def InputLoop():
 
             sendingmsg = inputfield.get("1.0", "end")
             inputfield.delete("1.0", "end")
-            sending.run_until_complete(Send(chat_id, sendingmsg))
             receivedList.append(message)
             saveMessage(message)
+            sending.run_until_complete(Send(chat_id, sendingmsg))
             
 
     inputframe = tk.Frame(window)
